@@ -3,6 +3,13 @@ import { RefresherCustomEvent } from '@ionic/angular';
 import { MessageComponent } from '../message/message.component';
 
 import { DataService, Message } from '../services/data.service';
+import { TaskService } from '../services/task.service';
+
+export interface Task {
+  title: string;
+  description: string;
+  done: boolean;
+}
 
 @Component({
   selector: 'app-home',
@@ -10,8 +17,18 @@ import { DataService, Message } from '../services/data.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  private data = inject(DataService);
-  constructor() {}
+  tasks: Task[] = []
+
+  constructor( private taskService: TaskService) {}
+
+  ngOnInit() {
+    this.taskService.getTasks().subscribe({
+      next: (res: any) => {
+        this.tasks = res.tasks
+      }
+
+    })
+  }
 
   refresh(ev: any) {
     setTimeout(() => {
@@ -19,7 +36,9 @@ export class HomePage {
     }, 3000);
   }
 
-  getMessages(): Message[] {
-    return this.data.getMessages();
+  getTasks(): Task[] {
+    
+    return [];
   }
+
 }

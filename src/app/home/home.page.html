@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Inbox
+      Todo List
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -20,6 +20,6 @@
   </ion-header>
   
   <ion-list>
-    <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
+    <app-message *ngFor="let task of tasks" [task]="task"></app-message>
   </ion-list>
 </ion-content>
